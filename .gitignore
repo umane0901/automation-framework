@@ -1,0 +1,46 @@
+# =====================
+# Maven
+# =====================
+target/
+*.jar
+*.war
+*.ear
+
+# =====================
+# Logs & Reports
+# =====================
+*.log
+reports/
+test-output/
+surefire-reports/
+
+# =====================
+# IDE Files
+# =====================
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# =====================
+# OS Files
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Selenium
+# =====================
+screenshots/
+downloads/
+
+# =====================
+# Drivers (if any)
+# =====================
+*.exe
+chromedriver*
+geckodriver*
+msedgedriver*
+
