@@ -6,7 +6,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 
 public class DriverManager {
 	
-	private static ThreadLocal<WebDriver> driver = new ThreadLocal();
+	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 	
 	public static void init(String browser) {
 		if(driver.get() == null) {
@@ -23,5 +23,9 @@ public class DriverManager {
 	 public static WebDriver getDriver() {
 		 return driver.get();
 	 }
+	 
+	 public static void closeBrowser() {
+		driver.get().quit();
+	}
 	
 }
