@@ -33,8 +33,7 @@ public class DashboardPage {
 	
 	public boolean ValidateDashboard() throws InterruptedException {
 		boolean status = false;
-		WaitUtil.waitForVisibility(dashboardHdr, Config.XSMALL_PAUSE);
-		if(dashboardHdr.isDisplayed()) {
+		if(WaitUtil.isPresent(dashboardHdr, Config.XSMALL_PAUSE)) {
 			LoggerUtil.logMessage("Login in to the app is successful.");
 			status = true;
 		}

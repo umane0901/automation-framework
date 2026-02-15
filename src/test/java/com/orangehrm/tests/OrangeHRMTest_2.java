@@ -5,15 +5,13 @@ import org.testng.annotations.Test;
 import com.orangehrm.pageObjects.DashboardPage;
 import com.orangehrm.pageObjects.LoginPage;
 
-public class Test001 extends BaseClass{
+public class OrangeHRMTest_2 extends BaseClass{
 	
 	@Test
 	public void loginTest() throws InterruptedException {
 		LoginPage loginPage = new LoginPage();
 		DashboardPage dashboardPage = new DashboardPage();
-		
 		loginPage.loginToApp(userName, password);
 		dashboardPage.ValidateDashboard();
 	}
-
 }

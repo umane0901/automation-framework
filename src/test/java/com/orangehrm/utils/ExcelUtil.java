@@ -19,7 +19,6 @@ public class ExcelUtil {
 		try {
 			FileInputStream excelFile = new FileInputStream(filePath);
 			excelWBook = new XSSFWorkbook(excelFile);
-			System.out.println(excelWBook.getSheetAt(0).getRow(0).getCell(0));
 			excelWSheet = excelWBook.getSheet(sheetName);
 
 		} catch (Exception e) {
@@ -65,7 +64,7 @@ public class ExcelUtil {
 		int endIteration = 0;
 
 		int rowCount = excelWSheet.getLastRowNum();
-		startIteration = getFirstRowContainsTestCaseId(testCaseId, colNo);
+		startIteration = getFirstRowContainsTestCaseId(testCaseId, colNo); 
 
 		for (rowNo = startIteration; rowNo <= rowCount; rowNo++) {
 			if (getCellData(rowNo, colNo).equalsIgnoreCase(testCaseId))
@@ -109,12 +108,12 @@ public class ExcelUtil {
 		HashMap<String, String> testData = null;
 		HashMap<Integer, HashMap<String, String>> testDataIterations = new HashMap<Integer, HashMap<String, String>>();
 
-		sheetName = getModuleName(className);
+		sheetName = getModuleName(className); // OrangeHRMTest_4
 		testCaseId = getTestCaseId(className);
 
 		setExcelFile(Config.TEST_DATA_FILE_PATH, sheetName);
-		startIteration = getFirstRowContainsTestCaseId(testCaseId, 0);
-		endIteration = getLastRowContainsTestCaseId(testCaseId, 0);
+		startIteration = getFirstRowContainsTestCaseId(testCaseId, 0); //7
+		endIteration = getLastRowContainsTestCaseId(testCaseId, 0); //8
 
 		totalCols = excelWSheet.getRow(0).getLastCellNum();
 
