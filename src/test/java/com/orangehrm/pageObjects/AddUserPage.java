@@ -2,13 +2,10 @@ package com.orangehrm.pageObjects;
 
 import java.util.List;
 import java.util.Map;
-
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-
 import com.orangehrm.config.Config;
 import com.orangehrm.utils.DriverManager;
 import com.orangehrm.utils.LoggerUtil;
@@ -27,13 +24,19 @@ public class AddUserPage {
 		@FindBy(xpath = "//div[@class='oxd-table-card']/div[@role='row']/div[4]/div")
 		public List<WebElement> employeeNameLst;
 		
-		@FindBy(xpath = "//div[@role='option']/span")
-		public WebElement userRoleLst;
+		@FindBy(xpath = "(//div[@class='oxd-select-text-input'])[1]")
+		public WebElement roleSelect;
+
+		@FindBy(xpath = "(//div[@class='oxd-select-text-input'])[2]")
+		public WebElement statusSelect;
 		
 		@FindBy(xpath = "//div[@role='option']/span")
-		public WebElement statusLst;
+		public List<WebElement> userRoleLst;
 		
-		@FindBy(id = "systemUser_employeeName_empName")
+		@FindBy(xpath = "//div[@role='option']/span")
+		public List<WebElement> statusLst;
+		
+		@FindBy(xpath = "//input[@placeholder='Type for hints...']")
 		public WebElement employeeNameTxb;
 		
 		@FindBy(id = "systemUser_userName")
@@ -54,7 +57,7 @@ public class AddUserPage {
 
 		public boolean validateAddUserPage() {
 			boolean status = false;
-			WaitUtil.waitForVisibility(systemUserInfoFrm, Config.XSMALL_PAUSE);
+			WaitUtil.waitForElementToBeVisible(systemUserInfoFrm, Config.XSMALL_PAUSE);
 			if(systemUserInfoFrm.isDisplayed())
 				status = true;
 			
@@ -64,19 +67,28 @@ public class AddUserPage {
 		
 		public boolean setUserDetails(Map<String, String> testData) {
 			boolean status = false;
-			WaitUtil.waitForVisibility(employeeNameLst.get(0), Config.XSMALL_PAUSE);
+			WaitUtil.pause(5000);
+			WaitUtil.waitForElementToBeVisible(employeeNameLst.get(0), Config.SMALL_PAUSE);
 			String employeeName = employeeNameLst.get(0).getText();
+			LoggerUtil.logMessage(employeeName);
+			
 			
 			addBtn.click();
 			LoggerUtil.logMessage("Clicked on Add button on User Page");
-			Select role = new Select(userRoleLst);
-			role.selectByVisibleText(testData.get("UserRole"));
+			WaitUtil.waitForElementToBeVisible(roleSelect, Config.SMALL_PAUSE);
+			roleSelect.click();
+			for(WebElement role : userRoleLst) {
+				if(role.getText().equalsIgnoreCase(testData.get("UserRole"))) {
+					role.click();
+					break;
+				}
+			}
+			LoggerUtil.logMessage("User Role is selected");
+			
 			employeeNameTxb.sendKeys(employeeName);
 			employeeNameTxb.sendKeys(Keys.TAB);
 			addUserNameTxb.sendKeys(testData.get("AddUserName"));
-			
-			Select userStatus = new Select(statusLst);
-			userStatus.selectByVisibleText(testData.get("Status"));
+	
 			
 			newPasswordTxb.sendKeys(testData.get("NewPassword"));
 			confirmPasswordTxb.sendKeys(testData.get("ConfirmPassword"));

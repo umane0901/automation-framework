@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="tests" name="Smoke">
+	<listeners>
+      	<listener class-name="com.orangehrm.listener.TestListeners"/>
+    </listeners>
+
+	<test thread-count="2" parallel="methods" name="Smoke Test">
+		<classes>
+			<class name="com.orangehrm.tests.OrangeHRMTest_4" />
+			<class name="com.orangehrm.tests.OrangeHRMTest_3" />
+		</classes>
+	</test> <!-- Smoke Test -->
+	
+</suite> <!-- Smoke -->

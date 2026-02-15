@@ -17,7 +17,7 @@ public class BaseClass {
 	public static String password;
 	public static String url;
 	public static String browser;
-
+	
 	
 	public BaseClass() {
 		url = ConfigReader.get("url");

@@ -8,16 +8,13 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.orangehrm.pageObjects.AddUserPage;
 import com.orangehrm.pageObjects.DashboardPage;
 import com.orangehrm.pageObjects.LoginPage;
 import com.orangehrm.utils.ExcelUtil;
-import com.orangehrm.utils.LoggerUtil;
 
-public class OrangeHRMTest_1 extends BaseClass{
+public class OrangeHRMTest_4 extends BaseClass{
 	protected static String className;	
 	protected static HashMap<Integer, HashMap<String, String>> testData;
-	
 	
 	@DataProvider
 	public Iterator<Object[]> getData(){
@@ -34,20 +31,21 @@ public class OrangeHRMTest_1 extends BaseClass{
 	public void verifyAddingUserTest(HashMap<String, String> testData) throws InterruptedException {
 		LoginPage loginPage = new LoginPage();
 		DashboardPage dashboardPage = new DashboardPage();
-		AddUserPage addUserPage = new AddUserPage();
+//		AddUserPage addUserPage = new AddUserPage();
 		
-		loginPage.loginToApp(userName, password);
+		loginPage.loginToApp(testData.get("UserName"), testData.get("Password"));
 		boolean status = dashboardPage.ValidateDashboard();
 		Assert.assertTrue(status, "User login failed");
 		
-		dashboardPage.naviteToUsersModule();
-		status = addUserPage.validateAddUserPage();
-		Assert.assertTrue(status,"Users module navigation failed.");
+		status= loginPage.logOutOrangeHRM();
+		Assert.assertTrue(status, "Sucessfully logout from the application..");
 		
-		status = addUserPage.setUserDetails(testData);
-		Assert.assertTrue(status, "Users details not set properly.");
-	LoggerUtil.logMessage(testData.get("Password"));
-	LoggerUtil.logMessage(testData.get("UserName"));
+//		dashboardPage.naviteToUsersModule();
+//		status = addUserPage.validateAddUserPage();
+//		Assert.assertTrue(status,"Users module navigation failed.");
+//		
+//		status = addUserPage.setUserDetails(testData);
+//		Assert.assertTrue(status, "Users details not set properly.");
 	}
 
 }
