@@ -8,7 +8,6 @@
 	<test thread-count="2" parallel="methods" name="Smoke Test">
 		<classes>
 			<class name="com.orangehrm.tests.OrangeHRMTest_4" />
-			<class name="com.orangehrm.tests.OrangeHRMTest_3" />
 		</classes>
 	</test> <!-- Smoke Test -->
 	

@@ -24,7 +24,6 @@ public class ExcelUtil {
 		} catch (Exception e) {
 
 			LoggerUtil.logError("Error while opening TestData file: " + e);
-//			System.out.println("Error while opening TestData file: " + e);
 		}
 	}
 
